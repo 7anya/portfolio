@@ -363,7 +363,7 @@ class _HomePageState extends State<HomePage> {
                                         height: size.height * 0.04,
                                       ),
                                       FeatureProject(
-                                        imagePath: "images/pic9.jpg",
+                                        imagePath: "https://github.com/7anya/P.S.its-easy/blob/main/images/home.png",
                                         ontab: () {
                                           method.launchURL(
                                               "https://psitseasy.ml");
@@ -382,7 +382,7 @@ class _HomePageState extends State<HomePage> {
 
                                       MainTiitle(
                                         number: "0.4",
-                                        text: "Open Source Project",
+                                        text: "Research Interests",
                                       ),
 
                                       SizedBox(
@@ -395,220 +395,210 @@ class _HomePageState extends State<HomePage> {
                                         width: size.width - 100,
                                         child: Column(
                                           children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                OSImages(
-                                                  image: "images/pic101.png",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic103.png",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic111.gif",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic113.jfif",
-                                                ),
-                                              ],
+                                            CustomText(
+                                              text: "Computer Systems",
+                                              textsize: 16.0,
+                                              color: Colors.white
+                                                  .withOpacity(0.4),
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 1.75,
                                             ),
                                             SizedBox(
                                               height: size.height * 0.04,
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                CustomText(
-                                                  text: "Payment Getway",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "Chat App",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "Spotify Clone",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "TODO App",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                              ],
-                                            ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.spaceAround,
+                                            //   children: [
+                                            //     CustomText(
+                                            //       text: "Payment Getway",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "Chat App",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "Spotify Clone",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "TODO App",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //   ],
+                                            // ),
                                           ],
                                         ),
                                       ),
 
                                       //other Projects
-                                      Container(
-                                        height: size.height * 0.86,
-                                        width: size.width - 100,
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                OSImages(
-                                                  image: "images/pic114.png",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic115.png",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic116.jfif",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic117.png",
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: size.height * 0.04,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                CustomText(
-                                                  text: "Spannish Audio",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "Drumpad",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "Currency Converter",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "Calculator",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      // Container(
+                                      //   height: size.height * 0.86,
+                                      //   width: size.width - 100,
+                                      //   child: Column(
+                                      //     children: [
+                                      //       Row(
+                                      //         mainAxisAlignment:
+                                      //             MainAxisAlignment.spaceAround,
+                                      //         children: [
+                                      //           OSImages(
+                                      //             image: "images/pic114.png",
+                                      //           ),
+                                      //           OSImages(
+                                      //             image: "images/pic115.png",
+                                      //           ),
+                                      //           OSImages(
+                                      //             image: "images/pic116.jfif",
+                                      //           ),
+                                      //           OSImages(
+                                      //             image: "images/pic117.png",
+                                      //           ),
+                                      //         ],
+                                      //       ),
+                                      //       SizedBox(
+                                      //         height: size.height * 0.04,
+                                      //       ),
+                                      //       // Row(
+                                      //       //   mainAxisAlignment:
+                                      //       //       MainAxisAlignment.spaceAround,
+                                      //       //   children: [
+                                      //       //     CustomText(
+                                      //       //       text: "Spannish Audio",
+                                      //       //       textsize: 16.0,
+                                      //       //       color: Colors.white
+                                      //       //           .withOpacity(0.4),
+                                      //       //       fontWeight: FontWeight.w700,
+                                      //       //       letterSpacing: 1.75,
+                                      //       //     ),
+                                      //       //     CustomText(
+                                      //       //       text: "Drumpad",
+                                      //       //       textsize: 16.0,
+                                      //       //       color: Colors.white
+                                      //       //           .withOpacity(0.4),
+                                      //       //       fontWeight: FontWeight.w700,
+                                      //       //       letterSpacing: 1.75,
+                                      //       //     ),
+                                      //       //     CustomText(
+                                      //       //       text: "Currency Converter",
+                                      //       //       textsize: 16.0,
+                                      //       //       color: Colors.white
+                                      //       //           .withOpacity(0.4),
+                                      //       //       fontWeight: FontWeight.w700,
+                                      //       //       letterSpacing: 1.75,
+                                      //       //     ),
+                                      //       //     CustomText(
+                                      //       //       text: "Calculator",
+                                      //       //       textsize: 16.0,
+                                      //       //       color: Colors.white
+                                      //       //           .withOpacity(0.4),
+                                      //       //       fontWeight: FontWeight.w700,
+                                      //       //       letterSpacing: 1.75,
+                                      //       //     ),
+                                      //       //   ],
+                                      //       // ),
+                                      //     ],
+                                      //   ),
+                                      // ),
 
-                                      //other Projects
-                                      Container(
-                                        height: size.height * 0.86,
-                                        width: size.width - 100,
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                OSImages(
-                                                  image: "images/pic118.jpeg",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic119.jpeg",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic120.png",
-                                                ),
-                                                OSImages(
-                                                  image: "images/pic121.png",
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: size.height * 0.04,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                CustomText(
-                                                  text: "Prime Videos UI",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "Tic Tac Toe Game",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "Currency Converter UI",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                CustomText(
-                                                  text: "Love Calculator",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      // //other Projects
+                                      // Container(
+                                      //   height: size.height * 0.86,
+                                      //   width: size.width - 100,
+                                      //   child: Column(
+                                      //     children: [
+                                      //       Row(
+                                      //         mainAxisAlignment:
+                                      //             MainAxisAlignment.spaceAround,
+                                      //         children: [
+                                      //           OSImages(
+                                      //             image: "images/pic118.jpeg",
+                                      //           ),
+                                      //           OSImages(
+                                      //             image: "images/pic119.jpeg",
+                                      //           ),
+                                      //           OSImages(
+                                      //             image: "images/pic120.png",
+                                      //           ),
+                                      //           OSImages(
+                                      //             image: "images/pic121.png",
+                                      //           ),
+                                      //         ],
+                                      //       ),
+                                      //       SizedBox(
+                                      //         height: size.height * 0.04,
+                                      //       ),
+                                      //       Row(
+                                      //         mainAxisAlignment:
+                                      //             MainAxisAlignment.spaceAround,
+                                      //         children: [
+                                      //           CustomText(
+                                      //             text: "Prime Videos UI",
+                                      //             textsize: 16.0,
+                                      //             color: Colors.white
+                                      //                 .withOpacity(0.4),
+                                      //             fontWeight: FontWeight.w700,
+                                      //             letterSpacing: 1.75,
+                                      //           ),
+                                      //           CustomText(
+                                      //             text: "Tic Tac Toe Game",
+                                      //             textsize: 16.0,
+                                      //             color: Colors.white
+                                      //                 .withOpacity(0.4),
+                                      //             fontWeight: FontWeight.w700,
+                                      //             letterSpacing: 1.75,
+                                      //           ),
+                                      //           CustomText(
+                                      //             text: "Currency Converter UI",
+                                      //             textsize: 16.0,
+                                      //             color: Colors.white
+                                      //                 .withOpacity(0.4),
+                                      //             fontWeight: FontWeight.w700,
+                                      //             letterSpacing: 1.75,
+                                      //           ),
+                                      //           CustomText(
+                                      //             text: "Love Calculator",
+                                      //             textsize: 16.0,
+                                      //             color: Colors.white
+                                      //                 .withOpacity(0.4),
+                                      //             fontWeight: FontWeight.w700,
+                                      //             letterSpacing: 1.75,
+                                      //           ),
+                                      //         ],
+                                      //       ),
+                                      //     ],
+                                      //   ),
+                                      // ),
 
-                                      FeatureProject(
-                                        imagePath: "images/pic104.png",
-                                        ontab: () {
-                                          method.launchURL(
-                                              "https://github.com/champ96k/Flutter-UI-Kit");
-                                        },
-                                        projectDesc:
-                                            "A nicer look at your GitHub profile and repo stats. Includes data visualizations of your top languages, starred repositories, and sort through your top repos by number of stars, forks, and size.",
-                                        projectTitle: "Sign Up and Sign In",
-                                        tech1: "Dart",
-                                        tech2: "Flutter",
-                                        tech3: "Flutter UI",
-                                      ),
+                                      // FeatureProject(
+                                      //   imagePath: "images/pic104.png",
+                                      //   ontab: () {
+                                      //     method.launchURL(
+                                      //         "https://github.com/champ96k/Flutter-UI-Kit");
+                                      //   },
+                                      //   projectDesc:
+                                      //       "A nicer look at your GitHub profile and repo stats. Includes data visualizations of your top languages, starred repositories, and sort through your top repos by number of stars, forks, and size.",
+                                      //   projectTitle: "Sign Up and Sign In",
+                                      //   tech1: "Dart",
+                                      //   tech2: "Flutter",
+                                      //   tech3: "Flutter UI",
+                                      // ),
 
 
 
