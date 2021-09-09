@@ -363,7 +363,7 @@ class _HomePageState extends State<HomePage> {
                                         height: size.height * 0.04,
                                       ),
                                       FeatureProject(
-                                        imagePath: "https://github.com/7anya/P.S.its-easy/blob/main/images/home.png",
+                                        imagePath: "/images/psiseasy.png",
                                         ontab: () {
                                           method.launchURL(
                                               "https://psitseasy.ml");
