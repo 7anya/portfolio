@@ -9,6 +9,12 @@ class WorkBox extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         WorkCustomData(
+          title: "Microsoft",
+          subTitle:
+          "Incoming Intern at Microsoft for summer 2022 ",
+          duration: "2022",
+        ),
+        WorkCustomData(
           title: "Google Summer of Code- AOSSIE",
           subTitle:
               "Selected as Google Summer of Code participant ",

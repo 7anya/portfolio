@@ -1,11 +1,11 @@
 {
-    "name": "potrtfolio",
-    "short_name": "potrtfolio",
+    "name": "Tanya's Website",
+    "short_name": "Tanya's Website",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Tanya's Website",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

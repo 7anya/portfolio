@@ -110,10 +110,11 @@ class About extends StatelessWidget {
                         height: size.height * 0.15,
                         child: Column(
                           children: [
-                            technology(context, "Dart"),
+                            technology(context, "Go"),
                             technology(context, "Flutter"),
-                            technology(context, "Firebase"),
-                            technology(context, "UI/UX (Adobe Xd)"),
+                            technology(context, "Firebase/MongoDB"),
+                            technology(context, "Linux"),
+                            technology(context, "Networks"),
                           ],
                         ),
                       ),
@@ -123,9 +124,11 @@ class About extends StatelessWidget {
                         child: Column(
                           children: [
                             technology(context, "C/C++, Java."),
-                            technology(context, "HTML & (S)CSS"),
+                            technology(context, "Python"),
                             technology(context, "MYSQL"),
                             technology(context, "Git - Github"),
+                            technology(context, "Agile"),
+
                           ],
                         ),
                       )

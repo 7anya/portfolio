@@ -75,17 +75,17 @@ class _WorkState extends State<Work> {
                             children: [
                               CircleAvatar(
                                 backgroundColor: Colors.pink,
-                                child: FaIcon(FontAwesomeIcons.laptopHouse,
+                                child: FaIcon(FontAwesomeIcons.microsoft,
                                     color: Colors.white),
                               ),
                               CircleAvatar(
                                 backgroundColor: Colors.red,
-                                child: FaIcon(FontAwesomeIcons.freeCodeCamp,
+                                child: FaIcon(FontAwesomeIcons.google,
                                     color: Colors.white),
                               ),
                               CircleAvatar(
                                 backgroundColor: Colors.brown,
-                                child: FaIcon(FontAwesomeIcons.laptopCode,
+                                child: FaIcon(FontAwesomeIcons.redhat,
                                     color: Colors.white),
                               ),
                               CircleAvatar(
@@ -93,11 +93,11 @@ class _WorkState extends State<Work> {
                                 child: FaIcon(FontAwesomeIcons.coffee,
                                     color: Colors.white),
                               ),
-                              CircleAvatar(
-                                backgroundColor: Colors.deepPurple,
-                                child: FaIcon(FontAwesomeIcons.dev,
-                                    color: Colors.white),
-                              ),
+                              // CircleAvatar(
+                              //   backgroundColor: Colors.deepPurple,
+                              //   child: FaIcon(FontAwesomeIcons.dev,
+                              //       color: Colors.white),
+                              // ),
                             ],
                           )),
                         )

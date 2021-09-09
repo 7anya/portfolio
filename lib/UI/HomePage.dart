@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Tab(
                                   child: AppBarTitle(
-                                    text: 'Contact Us',
+                                    text: 'Contact',
                                   ),
                                 ),
                               ],
@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                               hoverColor: Color(0xFF3E0449),
                               onPressed: () {
                                 method.launchURL(
-                                    "https://drive.google.com/file/d/1yHLcrN5pCUGIeT8SrwC2L95Lv0MVbJpx/view?usp=sharing");
+                                    "https://drive.google.com/file/d/19GflHg7LlYQjfNA2lYc5lwAVegAJJ5-q/view?usp=sharing");
                               },
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -192,11 +192,11 @@ class _HomePageState extends State<HomePage> {
                               method.launchURL("https://github.com/7anya");
                             }),
                         IconButton(
-                            icon: FaIcon(FontAwesomeIcons.twitter),
+                            icon: FaIcon(FontAwesomeIcons.blogger),
                             color: Color(0xffffA8B2D1),
                             iconSize: 16.0,
                             onPressed: () {
-                              method.launchURL("https://twitter.com/");
+                              method.launchURL("https://one-to-tan.blogspot.com/");
                             }),
                         IconButton(
                           icon: FaIcon(FontAwesomeIcons.linkedin),
@@ -396,7 +396,7 @@ class _HomePageState extends State<HomePage> {
                                         child: Column(
                                           children: [
                                             CustomText(
-                                              text: "Computer Systems",
+                                              text: "I am exploring research in the field of computer systems\n Currently working on designing advanced schedulers for MPQUIC protocol using a cross layer approach\n",
                                               textsize: 16.0,
                                               color: Colors.white
                                                   .withOpacity(0.4),
