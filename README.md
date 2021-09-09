@@ -1,5 +1,5 @@
 
-## Dev Portfolio
+## My website
 
 
 Software Developer Portfolio Template that helps you showcase your work and skills as a software developer. A lightweight, customizable single-page personal portfolio website template built using Dart, Flutter web.
@@ -7,7 +7,7 @@ Software Developer Portfolio Template that helps you showcase your work and skil
 
 
 
-## To view a live demo,[Click Here](https://champ96k.github.io).
+
 
 
 
@@ -20,12 +20,6 @@ Software Developer Portfolio Template that helps you showcase your work and skil
 -  [X] IOs
    
    
-##  Wanna Contribute? 🚀
-  You can contribute by doing one of the following:
-  - Starring the repository ⭐
-  - Forking the repository 🍴
-  - Creating an Issue ❌
-  - Creating a Pull Request ✔
 
 
 ## Web Set up
