@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:potrtfolio/Model/Method.dart';
-import 'package:potrtfolio/UI/About.dart';
-import 'package:potrtfolio/UI/FeatureProject.dart';
-import 'package:potrtfolio/UI/Work.dart';
-import 'package:potrtfolio/Widget/AppBarTitle.dart';
-import 'package:potrtfolio/Widget/CustomText.dart';
-import 'package:potrtfolio/Widget/MainTiitle.dart';
-import 'package:potrtfolio/Widget/OSImages.dart';
+import 'package:Tanya/Model/Method.dart';
+import 'package:Tanya/UI/About.dart';
+import 'package:Tanya/UI/FeatureProject.dart';
+import 'package:Tanya/UI/Work.dart';
+import 'package:Tanya/Widget/AppBarTitle.dart';
+import 'package:Tanya/Widget/CustomText.dart';
+import 'package:Tanya/Widget/MainTiitle.dart';
+import 'package:Tanya/Widget/OSImages.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'dart:convert';
+import 'dart:async';
+import 'package:http/http.dart' as http;
+
+class Blog {
+  String name;
+  String url;
+
+  Blog(this.name, this.url);
+}
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   Method method = Method();
   AutoScrollController _autoScrollController;
   final scrollDirection = Axis.vertical;
-
+  List<Blog> blogList = [];
   bool isExpaned = true;
 
   bool get _isAppBarExpanded {
@@ -52,6 +62,22 @@ class _HomePageState extends State<HomePage> {
                 : {},
       );
     super.initState();
+    fetchBlogs().then((value) => null);
+  }
+
+  Future<bool> fetchBlogs() async {
+    final response = await http.get(Uri.parse(
+        'https://www.googleapis.com/blogger/v3/blogs/5624676173177206066/posts?key=AIzaSyBL2PBVyJeCaBxXkBdW-T_CMOJ7IrJCWW4'));
+    var temp = jsonDecode(response.body);
+    List<dynamic> blogs = temp["items"];
+    // Use the compute function to run parsePhotos in a separate isolate.
+    for (var i = 0; i < blogs.length; i++) {
+      print("#71 " + blogs[i]["url"] + " " + blogs[i]["title"]);
+      // blogList.add(Blog("hi","hi"))//;
+
+      blogList.add(Blog(blogs[i]["title"], blogs[i]["url"]));
+    }
+    return true;
   }
 
   Future _scrollToIndex(int index) async {
@@ -211,7 +237,8 @@ class _HomePageState extends State<HomePage> {
                             color: Color(0xffffA8B2D1),
                             iconSize: 16.0,
                             onPressed: () {
-                              method.launchURL("https://one-to-tan.blogspot.com/");
+                              method.launchURL(
+                                  "https://one-to-tan.blogspot.com/");
                             }),
                         IconButton(
                           icon: FaIcon(FontAwesomeIcons.linkedin),
@@ -282,8 +309,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 4.0,
                                   ),
                                   CustomText(
-                                    text:
-                                        "Learn. Create. Repeat. ",
+                                    text: "Learn. Create. Repeat. ",
                                     textsize: 56.0,
                                     color: Color(0xffCCD6F6).withOpacity(0.6),
                                     fontWeight: FontWeight.w700,
@@ -345,8 +371,6 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
 
-                              
-
                               //About Me
                               _wrapScrollTag(
                                 index: 0,
@@ -357,10 +381,7 @@ class _HomePageState extends State<HomePage> {
                               ),
 
                               //Where I've Worked
-                              _wrapScrollTag(
-                                index: 1,
-                                child:Work()
-                              ),
+                              _wrapScrollTag(index: 1, child: Work()),
                               SizedBox(
                                 height: size.height * 0.10,
                               ),
@@ -386,15 +407,10 @@ class _HomePageState extends State<HomePage> {
                                         projectDesc:
                                             "All round assist portal for Practice School Allotment",
                                         projectTitle: "PS.Its-Easy",
-                                        tech1: "Flutter",
-                                        tech2: "Dart",
-                                        tech3: "Flutter UI",
+                                        tech1: "Flask",
+                                        tech2: "React",
+                                        tech3: "MongoDB",
                                       ),
-
-
-
-
-
 
                                       //other Projects
                                       // Container(
@@ -547,12 +563,6 @@ class _HomePageState extends State<HomePage> {
                                       //   tech2: "Flutter",
                                       //   tech3: "Flutter UI",
                                       // ),
-
-
-
-
-
-
                                     ],
                                   )),
 
@@ -560,239 +570,271 @@ class _HomePageState extends State<HomePage> {
                                 height: 6.0,
                               ),
                               _wrapScrollTag(
-                                index:3,
-                                child: Column(
-                                  children: [
-                                    MainTiitle(
-                                      number: "0.4",
-                                      text: "Research Interests",
-                                    ),
-
-                                    SizedBox(
-                                      height: size.height * 0.04,
-                                    ),
-
-                                    //other Projects
-                                    Container(
-                                      height: size.height * 0.86,
-                                      width: size.width - 100,
-                                      child: Column(
-                                        children: [
-                                          CustomText(
-                                            text: "I am exploring research in the field of computer systems\n Currently working on designing advanced schedulers for MPQUIC protocol using a cross layer approach\n",
-                                            textsize: 16.0,
-                                            color: Colors.white
-                                                .withOpacity(0.4),
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 1.75,
-                                          ),
-                                          SizedBox(
-                                            height: size.height * 0.04,
-                                          ),
-                                          // Row(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.spaceAround,
-                                          //   children: [
-                                          //     CustomText(
-                                          //       text: "Payment Getway",
-                                          //       textsize: 16.0,
-                                          //       color: Colors.white
-                                          //           .withOpacity(0.4),
-                                          //       fontWeight: FontWeight.w700,
-                                          //       letterSpacing: 1.75,
-                                          //     ),
-                                          //     CustomText(
-                                          //       text: "Chat App",
-                                          //       textsize: 16.0,
-                                          //       color: Colors.white
-                                          //           .withOpacity(0.4),
-                                          //       fontWeight: FontWeight.w700,
-                                          //       letterSpacing: 1.75,
-                                          //     ),
-                                          //     CustomText(
-                                          //       text: "Spotify Clone",
-                                          //       textsize: 16.0,
-                                          //       color: Colors.white
-                                          //           .withOpacity(0.4),
-                                          //       fontWeight: FontWeight.w700,
-                                          //       letterSpacing: 1.75,
-                                          //     ),
-                                          //     CustomText(
-                                          //       text: "TODO App",
-                                          //       textsize: 16.0,
-                                          //       color: Colors.white
-                                          //           .withOpacity(0.4),
-                                          //       fontWeight: FontWeight.w700,
-                                          //       letterSpacing: 1.75,
-                                          //     ),
-                                          //   ],
-                                          // ),
-                                        ],
+                                  index: 3,
+                                  child: Column(
+                                    children: [
+                                      MainTiitle(
+                                        number: "0.4",
+                                        text: "Research Interests",
                                       ),
-                                    ),
 
-                                  ],
-                                )
+                                      SizedBox(
+                                        height: size.height * 0.04,
+                                      ),
 
+                                      //other Projects
+                                      Container(
+                                        height: size.height * 0.86,
+                                        width: size.width - 100,
+                                        child: Column(
+                                          children: [
+                                            CustomText(
+                                              text:
+                                                  "I am exploring research in the field of computer systems\n Currently working on designing advanced schedulers for MPQUIC protocol using a cross layer approach\n",
+                                              textsize: 16.0,
+                                              color:
+                                                  Colors.white.withOpacity(0.4),
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 1.75,
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.04,
+                                            ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.spaceAround,
+                                            //   children: [
+                                            //     CustomText(
+                                            //       text: "Payment Getway",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "Chat App",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "Spotify Clone",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "TODO App",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6.0,
                               ),
-                                  SizedBox(
-                                    height: 6.0,
-                                  ),
-                                  _wrapScrollTag(
-                                      index:4,
-                                      child: Column(
-                                        children: [
-                                          MainTiitle(
-                                            number: "0.5",
-                                            text: "Blog",
-                                          ),
+                              _wrapScrollTag(
+                                  index: 4,
+                                  child: Column(
+                                    children: [
+                                      MainTiitle(
+                                        number: "0.5",
+                                        text: "Blog",
+                                      ),
 
-                                          SizedBox(
-                                            height: size.height * 0.04,
-                                          ),
+                                      SizedBox(
+                                        height: size.height * 0.04,
+                                      ),
 
-                                          //other Projects
-                                          Container(
-                                            height: size.height * 0.86,
-                                            width: size.width - 100,
-                                            child: Column(
-                                              children: [
-                                                CustomText(
-                                                  text: "I have a blog where I write about interesting tech related things\nYou can find it on https://one-to-tan@blogspot.com",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                SizedBox(
-                                                  height: size.height * 0.04,
-                                                ),
-                                                // Row(
-                                                //   mainAxisAlignment:
-                                                //       MainAxisAlignment.spaceAround,
-                                                //   children: [
-                                                //     CustomText(
-                                                //       text: "Payment Getway",
-                                                //       textsize: 16.0,
-                                                //       color: Colors.white
-                                                //           .withOpacity(0.4),
-                                                //       fontWeight: FontWeight.w700,
-                                                //       letterSpacing: 1.75,
-                                                //     ),
-                                                //     CustomText(
-                                                //       text: "Chat App",
-                                                //       textsize: 16.0,
-                                                //       color: Colors.white
-                                                //           .withOpacity(0.4),
-                                                //       fontWeight: FontWeight.w700,
-                                                //       letterSpacing: 1.75,
-                                                //     ),
-                                                //     CustomText(
-                                                //       text: "Spotify Clone",
-                                                //       textsize: 16.0,
-                                                //       color: Colors.white
-                                                //           .withOpacity(0.4),
-                                                //       fontWeight: FontWeight.w700,
-                                                //       letterSpacing: 1.75,
-                                                //     ),
-                                                //     CustomText(
-                                                //       text: "TODO App",
-                                                //       textsize: 16.0,
-                                                //       color: Colors.white
-                                                //           .withOpacity(0.4),
-                                                //       fontWeight: FontWeight.w700,
-                                                //       letterSpacing: 1.75,
-                                                //     ),
-                                                //   ],
-                                                // ),
-                                              ],
+                                      //other Projects
+                                      Container(
+                                        // height: size.height * 0.86,
+                                        width: size.width - 100,
+                                        child: Column(
+                                          children: [
+                                            CustomText(
+                                              text:
+                                                  "I have a blog where I write about interesting tech related things\nYou can find it on https://one-to-tan@blogspot.com\nor click the links below",
+                                              textsize: 16.0,
+                                              color:
+                                                  Colors.white.withOpacity(0.4),
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 1.75,
                                             ),
-                                          ),
-
-                                        ],
-                                      )
-
-                                  ),
-                                  SizedBox(
-                                    height: 6.0,
-                                  ),
-                                  _wrapScrollTag(
-                                      index:5,
-                                      child: Column(
-                                        children: [
-                                          MainTiitle(
-                                            number: "0.5",
-                                            text: "Fun",
-                                          ),
-
-                                          SizedBox(
-                                            height: size.height * 0.04,
-                                          ),
-
-                                          //other Projects
-                                          Container(
-                                            height: size.height * 0.86,
-                                            width: size.width - 100,
-                                            child: Column(
-                                              children: [
-                                                CustomText(
-                                                  text: "I play Tennis and Ultimate Frisbee :)",
-                                                  textsize: 16.0,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4),
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1.75,
-                                                ),
-                                                SizedBox(
-                                                  height: size.height * 0.04,
-                                                ),
-                                                // Row(
-                                                //   mainAxisAlignment:
-                                                //       MainAxisAlignment.spaceAround,
-                                                //   children: [
-                                                //     CustomText(
-                                                //       text: "Payment Getway",
-                                                //       textsize: 16.0,
-                                                //       color: Colors.white
-                                                //           .withOpacity(0.4),
-                                                //       fontWeight: FontWeight.w700,
-                                                //       letterSpacing: 1.75,
-                                                //     ),
-                                                //     CustomText(
-                                                //       text: "Chat App",
-                                                //       textsize: 16.0,
-                                                //       color: Colors.white
-                                                //           .withOpacity(0.4),
-                                                //       fontWeight: FontWeight.w700,
-                                                //       letterSpacing: 1.75,
-                                                //     ),
-                                                //     CustomText(
-                                                //       text: "Spotify Clone",
-                                                //       textsize: 16.0,
-                                                //       color: Colors.white
-                                                //           .withOpacity(0.4),
-                                                //       fontWeight: FontWeight.w700,
-                                                //       letterSpacing: 1.75,
-                                                //     ),
-                                                //     CustomText(
-                                                //       text: "TODO App",
-                                                //       textsize: 16.0,
-                                                //       color: Colors.white
-                                                //           .withOpacity(0.4),
-                                                //       fontWeight: FontWeight.w700,
-                                                //       letterSpacing: 1.75,
-                                                //     ),
-                                                //   ],
-                                                // ),
-                                              ],
+                                            SizedBox(
+                                              height: size.height * 0.04,
                                             ),
-                                          ),
+                                            ListView.builder(
+                                                shrinkWrap: true,
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                itemCount: blogList.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return new Container(
+                                                      // color: Colors.amber,
 
-                                        ],
-                                      )
+                                                      child: Column(
+                                                    children: [
+                                                      new InkWell(
+                                                          child: CustomText(
+                                                            text: "> " +
+                                                                blogList[index]
+                                                                    .name,
+                                                            textsize: 16.0,
+                                                            color: Colors.red
+                                                                .withOpacity(
+                                                                    0.8),
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            letterSpacing: 1.75,
+                                                          ),
 
-                                  ),
+                                                          onTap: () =>
+                                                              method.launchURL(
+                                                                  blogList[
+                                                                          index]
+                                                                      .url)),
+                                                      // SizedBox(height:20),
+                                                      // Image.network("https://lh3.googleusercontent.com/-AwkRDDgxgRQ/YNdjCcF0nyI/AAAAAAAAb3M/Ac7SmJR3mJ07tYTtGhYuFiwHc7PEJknKgCNcBGAsYHQ/w945-h600-p-k-no-nu/image.png"),
+                                                      SizedBox(height:40),
+                                                    ],
+                                                  ));
+                                                })
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.spaceAround,
+                                            //   children: [
+                                            //     CustomText(
+                                            //       text: "Payment Getway",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "Chat App",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "Spotify Clone",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "TODO App",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6.0,
+                              ),
+                              _wrapScrollTag(
+                                  index: 5,
+                                  child: Column(
+                                    children: [
+                                      MainTiitle(
+                                        number: "0.5",
+                                        text: "Fun",
+                                      ),
+
+                                      SizedBox(
+                                        height: size.height * 0.04,
+                                      ),
+
+                                      //other Projects
+                                      Container(
+                                        height: size.height * 0.86,
+                                        width: size.width - 100,
+                                        child: Column(
+                                          children: [
+                                            CustomText(
+                                              text:
+                                                  "I play Tennis and Ultimate Frisbee :)",
+                                              textsize: 16.0,
+                                              color:
+                                                  Colors.white.withOpacity(0.4),
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 1.75,
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.04,
+                                            ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.spaceAround,
+                                            //   children: [
+                                            //     CustomText(
+                                            //       text: "Payment Getway",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "Chat App",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "Spotify Clone",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //     CustomText(
+                                            //       text: "TODO App",
+                                            //       textsize: 16.0,
+                                            //       color: Colors.white
+                                            //           .withOpacity(0.4),
+                                            //       fontWeight: FontWeight.w700,
+                                            //       letterSpacing: 1.75,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )),
                               //Get In Touch
                               _wrapScrollTag(
                                 index: 6,

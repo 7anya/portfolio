@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:potrtfolio/Widget/work_custom_data.dart';
+import 'package:Tanya/Widget/work_custom_data.dart';
 
 class WorkBox extends StatelessWidget {
   @override
