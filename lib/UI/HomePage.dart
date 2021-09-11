@@ -249,13 +249,11 @@ class _HomePageState extends State<HomePage> {
                           },
                           iconSize: 16.0,
                         ),
-                        IconButton(
-                            icon: Icon(Icons.call),
-                            color: Color(0xffffA8B2D1),
-                            iconSize: 16.0,
-                            onPressed: () {
-                              method.launchCaller();
-                            }),
+                        // IconButton(
+                        //     icon: Icon(Icons.call),
+                        //     color: Color(0xffffA8B2D1),
+                        //     iconSize: 16.0,
+                        //     onPressed: null,),
                         IconButton(
                             icon: Icon(Icons.mail),
                             color: Color(0xffffA8B2D1),
