@@ -1,4 +1,4 @@
-package com.example.Tanya
+package com.example.mySite
 
 import io.flutter.embedding.android.FlutterActivity
 

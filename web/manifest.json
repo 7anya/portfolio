@@ -1,11 +1,11 @@
 {
-    "name": "Tanya's Website",
-    "short_name": "Tanya's Website",
+    "name": "My Website",
+    "short_name": "My Website",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Tanya's Website",
+    "description": "My Website",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

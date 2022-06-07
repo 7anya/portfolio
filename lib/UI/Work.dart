@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:Tanya/Widget/CustomText.dart';
-import 'package:Tanya/Widget/Workbox.dart';
+import 'package:mySite/Widget/CustomText.dart';
+import 'package:mySite/Widget/Workbox.dart';
 
 class Work extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:Tanya/UI/HomePage.dart';
-import 'package:Tanya/UI/MobileHome.dart';
+import 'package:mySite/UI/HomePage.dart';
+import 'package:mySite/UI/MobileHome.dart';
 
 class Home extends StatefulWidget {
   @override

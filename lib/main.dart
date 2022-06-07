@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Tanya/UI/Home.dart';
+import 'package:mySite/UI/Home.dart';
 
 void main() {
   runApp(MyApp());
