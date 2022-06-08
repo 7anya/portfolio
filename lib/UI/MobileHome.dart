@@ -35,7 +35,6 @@ class _MobileHomeState extends State<MobileHome> {
 
   @override
   Widget build(BuildContext context) {
-    Method method = Method();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color(0xff0A192F),
@@ -146,7 +145,7 @@ class _MobileHomeState extends State<MobileHome> {
                   ),
                   child: MaterialButton(
                     onPressed: () {
-                      method.launchEmail();
+                      Method.launchEmail();
                     },
                     hoverColor: Colors.green,
                     child: Text(
@@ -305,7 +304,7 @@ class _MobileHomeState extends State<MobileHome> {
                         width: size.width * 0.6,
                         child: Image(
                           fit: BoxFit.cover,
-                          image: AssetImage("images/pic1.jpeg"),
+                          image: AssetImage("images/profilePic.jpeg"),
                         ),
                       ),
                       Container(
@@ -786,7 +785,7 @@ class _MobileHomeState extends State<MobileHome> {
                       size: 15.0,
                     ),
                     onPressed: () {
-                      method.launchURL("https://github.com/champ96k");
+                      Method.launchURL("https://github.com/champ96k");
                     },
                   ),
                   IconButton(
@@ -796,7 +795,7 @@ class _MobileHomeState extends State<MobileHome> {
                       size: 15.0,
                     ),
                     onPressed: () {
-                      method.launchURL(
+                      Method.launchURL(
                           "https://www.linkedin.com/in/tushar-nikam-a29a97131/");
                     },
                   ),
@@ -807,7 +806,7 @@ class _MobileHomeState extends State<MobileHome> {
                       size: 15.0,
                     ),
                     onPressed: () {
-                      method.launchURL("https://twitter.com/champ_96k");
+                      Method.launchURL("https://twitter.com/champ_96k");
                     },
                   ),
                   IconButton(
@@ -817,7 +816,7 @@ class _MobileHomeState extends State<MobileHome> {
                       size: 15.0,
                     ),
                     onPressed: () {
-                      method.launchEmail();
+                      Method.launchEmail();
                     },
                   )
                 ],

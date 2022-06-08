@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mySite/Widget/CustomText.dart';
 import 'package:mySite/Widget/Workbox.dart';
+import 'package:mySite/staticData.dart';
 
 class Work extends StatefulWidget {
   @override
@@ -50,12 +50,32 @@ class _WorkState extends State<Work> {
           SizedBox(
             height: size.height * 0.07,
           ),
+          // Elements that contain the Work Experience
           Row(
             children: [
               Expanded(
+                  flex: 1,
+                  child: Container(
+                    height: size.height * 0.3 * Lists.workExperience.length,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        for (var workExperience in Lists.workExperience)
+                          Text(
+                            workExperience.date,
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Color(0xffCCD6F6).withOpacity(0.5),
+                              fontWeight: FontWeight.w700,
+                            ),
+                          )
+                      ],
+                    ),
+                  )),
+              Expanded(
                 flex: 1,
                 child: Container(
-                    height: size.height * 1.2,
+                    height: size.height * 0.3 * Lists.workExperience.length,
                     //color: Colors.indigo,
                     child: Stack(
                       children: [
@@ -73,31 +93,12 @@ class _WorkState extends State<Work> {
                               child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.pink,
-                                child: FaIcon(FontAwesomeIcons.microsoft,
-                                    color: Colors.white),
-                              ),
-                              CircleAvatar(
-                                backgroundColor: Colors.red,
-                                child: FaIcon(FontAwesomeIcons.google,
-                                    color: Colors.white),
-                              ),
-                              CircleAvatar(
-                                backgroundColor: Colors.brown,
-                                child: FaIcon(FontAwesomeIcons.redhat,
-                                    color: Colors.white),
-                              ),
-                              CircleAvatar(
-                                backgroundColor: Colors.deepOrange,
-                                child: FaIcon(FontAwesomeIcons.coffee,
-                                    color: Colors.white),
-                              ),
-                              // CircleAvatar(
-                              //   backgroundColor: Colors.deepPurple,
-                              //   child: FaIcon(FontAwesomeIcons.dev,
-                              //       color: Colors.white),
-                              // ),
+                              for (var workExperience in Lists.workExperience)
+                                CircleAvatar(
+                                  backgroundColor:
+                                      workExperience.iconBackground,
+                                  child: workExperience.icon,
+                                )
                             ],
                           )),
                         )
@@ -105,9 +106,9 @@ class _WorkState extends State<Work> {
                     )),
               ),
               Expanded(
-                  flex: 4,
+                  flex: 10,
                   child: Container(
-                    height: size.height * 1.2,
+                    height: size.height * 0.3 * Lists.workExperience.length,
                     child: WorkBox(),
                   ))
             ],

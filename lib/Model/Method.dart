@@ -1,31 +1,30 @@
+import 'package:mySite/staticData.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Method {
-
-  launchURL(String link) async {
-  var url = link;
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
- launchCaller() async {
-    const url = "tel:9595242507";   
+  static launchURL(String link) async {
+    var url = link;
     if (await canLaunch(url)) {
-       await launch(url);
+      await launch(url);
     } else {
       throw 'Could not launch $url';
-    }   
-}
-
-launchEmail() async {
-      if (await canLaunch("mailto:tamya.prasad@gmail.com")) {
-        await launch("mailto:tanya.prasad@gmail.com");
-      } else {
-        throw 'Could not launch';
-      }
     }
+  }
 
+  static launchCaller() async {
+    const url = "tel:" + Strings.telephone;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  static launchEmail() async {
+    if (await canLaunch("mailto:" + Strings.emailId)) {
+      await launch("mailto:" + Strings.emailId);
+    } else {
+      throw 'Could not launch';
+    }
+  }
 }

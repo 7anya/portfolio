@@ -1,18 +1,17 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
 import 'package:mySite/Model/Method.dart';
 import 'package:mySite/UI/About.dart';
-import 'package:mySite/UI/FeatureProject.dart';
 import 'package:mySite/UI/Work.dart';
 import 'package:mySite/Widget/AppBarTitle.dart';
 import 'package:mySite/Widget/CustomText.dart';
 import 'package:mySite/Widget/MainTiitle.dart';
-import 'package:mySite/Widget/OSImages.dart';
+import 'package:mySite/staticData.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'dart:convert';
-import 'dart:async';
-import 'package:http/http.dart' as http;
 
 class Blog {
   String name;
@@ -27,7 +26,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Method method = Method();
   AutoScrollController _autoScrollController;
   final scrollDirection = Axis.vertical;
   List<Blog> blogList = [];
@@ -66,8 +64,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> fetchBlogs() async {
-    final response = await http.get(Uri.parse(
-        'https://www.googleapis.com/blogger/v3/blogs/5624676173177206066/posts?key=AIzaSyBL2PBVyJeCaBxXkBdW-T_CMOJ7IrJCWW4'));
+    final response = await http.get(Uri.parse(Strings.fetchBlogsUrl));
     var temp = jsonDecode(response.body);
     List<dynamic> blogs = temp["items"];
     // Use the compute function to run parsePhotos in a separate isolate.
@@ -193,8 +190,7 @@ class _HomePageState extends State<HomePage> {
                             child: FlatButton(
                               hoverColor: Color(0xFF3E0449),
                               onPressed: () {
-                                method.launchURL(
-                                    "https://drive.google.com/file/d/19GflHg7LlYQjfNA2lYc5lwAVegAJJ5-q/view?usp=sharing");
+                                Method.launchURL(Strings.resumeUrl);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -225,30 +221,15 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        IconButton(
-                            icon: FaIcon(FontAwesomeIcons.github),
-                            color: Color(0xffffA8B2D1),
-                            iconSize: 16.0,
-                            onPressed: () {
-                              method.launchURL("https://github.com/7anya");
-                            }),
-                        IconButton(
-                            icon: FaIcon(FontAwesomeIcons.blogger),
-                            color: Color(0xffffA8B2D1),
-                            iconSize: 16.0,
-                            onPressed: () {
-                              method.launchURL(
-                                  "https://one-to-tan.blogspot.com/");
-                            }),
-                        IconButton(
-                          icon: FaIcon(FontAwesomeIcons.linkedin),
-                          color: Color(0xffffA8B2D1),
-                          onPressed: () {
-                            method.launchURL(
-                                "https://www.linkedin.com/in/tanya-prasad/");
-                          },
-                          iconSize: 16.0,
-                        ),
+                        for (var link in Lists.links)
+                          IconButton(
+                              icon: link.icon,
+                              color: Color(0xffffA8B2D1),
+                              iconSize: 16.0,
+                              onPressed: () {
+                                Method.launchURL(link.link);
+                              }),
+
                         // IconButton(
                         //     icon: Icon(Icons.call),
                         //     color: Color(0xffffA8B2D1),
@@ -259,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                             color: Color(0xffffA8B2D1),
                             iconSize: 16.0,
                             onPressed: () {
-                              method.launchEmail();
+                              Method.launchEmail();
                             }),
                         Padding(
                           padding: const EdgeInsets.only(top: 16.0),
@@ -289,8 +270,8 @@ class _HomePageState extends State<HomePage> {
                                     height: size.height * .06,
                                   ),
                                   CustomText(
-                                    text: "Hi, my name is",
-                                    textsize: 16.0,
+                                    text: "Hi! I am",
+                                    textsize: 20.0,
                                     color: Color(0xff41FBDA),
                                     letterSpacing: 3.0,
                                   ),
@@ -298,7 +279,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 6.0,
                                   ),
                                   CustomText(
-                                    text: "Tanya Prasad.",
+                                    text: Strings.fullName + ".",
                                     textsize: 68.0,
                                     color: Color(0xffCCD6F6),
                                     fontWeight: FontWeight.w900,
@@ -307,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 4.0,
                                   ),
                                   CustomText(
-                                    text: "Learn. Create. Repeat. ",
+                                    text: Strings.myTagline,
                                     textsize: 56.0,
                                     color: Color(0xffCCD6F6).withOpacity(0.6),
                                     fontWeight: FontWeight.w700,
@@ -318,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                                   Wrap(
                                     children: [
                                       Text(
-                                        "I am a Computer Science Undergrad at BITS Pilani, Hyderabad, graduating in 2023",
+                                        Strings.myShortDescription,
                                         style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 16.0,
@@ -335,7 +316,7 @@ class _HomePageState extends State<HomePage> {
                                   //get in tuch text
                                   InkWell(
                                     onTap: () {
-                                      method.launchEmail();
+                                      Method.launchEmail();
                                     },
                                     hoverColor:
                                         Color(0xff64FFDA).withOpacity(0.2),
@@ -381,7 +362,7 @@ class _HomePageState extends State<HomePage> {
                               //Where I've Worked
                               _wrapScrollTag(index: 1, child: Work()),
                               SizedBox(
-                                height: size.height * 0.10,
+                                height: size.height * 0.02,
                               ),
 
                               //Some Things I've Built Main Project
@@ -389,178 +370,16 @@ class _HomePageState extends State<HomePage> {
                                   index: 2,
                                   child: Column(
                                     children: [
-                                      MainTiitle(
+                                      MainTitle(
                                         number: "0.3",
                                         text: "Some Things I've Built",
                                       ),
                                       SizedBox(
                                         height: size.height * 0.04,
                                       ),
-                                      FeatureProject(
-                                        imagePath: "/images/psiseasy.png",
-                                        ontab: () {
-                                          method.launchURL(
-                                              "https://psitseasy.ml");
-                                        },
-                                        projectDesc:
-                                            "All round assist portal for Practice School Allotment",
-                                        projectTitle: "PS.Its-Easy",
-                                        tech1: "Flask",
-                                        tech2: "React",
-                                        tech3: "MongoDB",
-                                      ),
-
-                                      //other Projects
-                                      // Container(
-                                      //   height: size.height * 0.86,
-                                      //   width: size.width - 100,
-                                      //   child: Column(
-                                      //     children: [
-                                      //       Row(
-                                      //         mainAxisAlignment:
-                                      //             MainAxisAlignment.spaceAround,
-                                      //         children: [
-                                      //           OSImages(
-                                      //             image: "images/pic114.png",
-                                      //           ),
-                                      //           OSImages(
-                                      //             image: "images/pic115.png",
-                                      //           ),
-                                      //           OSImages(
-                                      //             image: "images/pic116.jfif",
-                                      //           ),
-                                      //           OSImages(
-                                      //             image: "images/pic117.png",
-                                      //           ),
-                                      //         ],
-                                      //       ),
-                                      //       SizedBox(
-                                      //         height: size.height * 0.04,
-                                      //       ),
-                                      //       // Row(
-                                      //       //   mainAxisAlignment:
-                                      //       //       MainAxisAlignment.spaceAround,
-                                      //       //   children: [
-                                      //       //     CustomText(
-                                      //       //       text: "Spannish Audio",
-                                      //       //       textsize: 16.0,
-                                      //       //       color: Colors.white
-                                      //       //           .withOpacity(0.4),
-                                      //       //       fontWeight: FontWeight.w700,
-                                      //       //       letterSpacing: 1.75,
-                                      //       //     ),
-                                      //       //     CustomText(
-                                      //       //       text: "Drumpad",
-                                      //       //       textsize: 16.0,
-                                      //       //       color: Colors.white
-                                      //       //           .withOpacity(0.4),
-                                      //       //       fontWeight: FontWeight.w700,
-                                      //       //       letterSpacing: 1.75,
-                                      //       //     ),
-                                      //       //     CustomText(
-                                      //       //       text: "Currency Converter",
-                                      //       //       textsize: 16.0,
-                                      //       //       color: Colors.white
-                                      //       //           .withOpacity(0.4),
-                                      //       //       fontWeight: FontWeight.w700,
-                                      //       //       letterSpacing: 1.75,
-                                      //       //     ),
-                                      //       //     CustomText(
-                                      //       //       text: "Calculator",
-                                      //       //       textsize: 16.0,
-                                      //       //       color: Colors.white
-                                      //       //           .withOpacity(0.4),
-                                      //       //       fontWeight: FontWeight.w700,
-                                      //       //       letterSpacing: 1.75,
-                                      //       //     ),
-                                      //       //   ],
-                                      //       // ),
-                                      //     ],
-                                      //   ),
-                                      // ),
-
-                                      // //other Projects
-                                      // Container(
-                                      //   height: size.height * 0.86,
-                                      //   width: size.width - 100,
-                                      //   child: Column(
-                                      //     children: [
-                                      //       Row(
-                                      //         mainAxisAlignment:
-                                      //             MainAxisAlignment.spaceAround,
-                                      //         children: [
-                                      //           OSImages(
-                                      //             image: "images/pic118.jpeg",
-                                      //           ),
-                                      //           OSImages(
-                                      //             image: "images/pic119.jpeg",
-                                      //           ),
-                                      //           OSImages(
-                                      //             image: "images/pic120.png",
-                                      //           ),
-                                      //           OSImages(
-                                      //             image: "images/pic121.png",
-                                      //           ),
-                                      //         ],
-                                      //       ),
-                                      //       SizedBox(
-                                      //         height: size.height * 0.04,
-                                      //       ),
-                                      //       Row(
-                                      //         mainAxisAlignment:
-                                      //             MainAxisAlignment.spaceAround,
-                                      //         children: [
-                                      //           CustomText(
-                                      //             text: "Prime Videos UI",
-                                      //             textsize: 16.0,
-                                      //             color: Colors.white
-                                      //                 .withOpacity(0.4),
-                                      //             fontWeight: FontWeight.w700,
-                                      //             letterSpacing: 1.75,
-                                      //           ),
-                                      //           CustomText(
-                                      //             text: "Tic Tac Toe Game",
-                                      //             textsize: 16.0,
-                                      //             color: Colors.white
-                                      //                 .withOpacity(0.4),
-                                      //             fontWeight: FontWeight.w700,
-                                      //             letterSpacing: 1.75,
-                                      //           ),
-                                      //           CustomText(
-                                      //             text: "Currency Converter UI",
-                                      //             textsize: 16.0,
-                                      //             color: Colors.white
-                                      //                 .withOpacity(0.4),
-                                      //             fontWeight: FontWeight.w700,
-                                      //             letterSpacing: 1.75,
-                                      //           ),
-                                      //           CustomText(
-                                      //             text: "Love Calculator",
-                                      //             textsize: 16.0,
-                                      //             color: Colors.white
-                                      //                 .withOpacity(0.4),
-                                      //             fontWeight: FontWeight.w700,
-                                      //             letterSpacing: 1.75,
-                                      //           ),
-                                      //         ],
-                                      //       ),
-                                      //     ],
-                                      //   ),
-                                      // ),
-
-                                      // FeatureProject(
-                                      //   imagePath: "images/pic104.png",
-                                      //   ontab: () {
-                                      //     method.launchURL(
-                                      //         "https://github.com/champ96k/Flutter-UI-Kit");
-                                      //   },
-                                      //   projectDesc:
-                                      //       "A nicer look at your GitHub profile and repo stats. Includes data visualizations of your top languages, starred repositories, and sort through your top repos by number of stars, forks, and size.",
-                                      //   projectTitle: "Sign Up and Sign In",
-                                      //   tech1: "Dart",
-                                      //   tech2: "Flutter",
-                                      //   tech3: "Flutter UI",
-                                      // ),
+                                      for (var featureProject
+                                          in Lists.featureProjects)
+                                        featureProject,
                                     ],
                                   )),
 
@@ -571,7 +390,7 @@ class _HomePageState extends State<HomePage> {
                                   index: 3,
                                   child: Column(
                                     children: [
-                                      MainTiitle(
+                                      MainTitle(
                                         number: "0.4",
                                         text: "Research Interests",
                                       ),
@@ -586,56 +405,23 @@ class _HomePageState extends State<HomePage> {
                                         width: size.width - 100,
                                         child: Column(
                                           children: [
-                                            CustomText(
-                                              text:
-                                                  "I am exploring research in the field of computer systems\n Currently working on designing advanced schedulers for MPQUIC protocol using a cross layer approach\n",
-                                              textsize: 16.0,
-                                              color:
-                                                  Colors.white.withOpacity(0.4),
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 1.75,
-                                            ),
-                                            SizedBox(
-                                              height: size.height * 0.04,
-                                            ),
-                                            // Row(
-                                            //   mainAxisAlignment:
-                                            //       MainAxisAlignment.spaceAround,
-                                            //   children: [
-                                            //     CustomText(
-                                            //       text: "Payment Getway",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "Chat App",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "Spotify Clone",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "TODO App",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //   ],
-                                            // ),
+                                            for (var researchInterest
+                                                in Lists.researchInterests)
+                                              Column(
+                                                children: [
+                                                  CustomText(
+                                                    text: researchInterest,
+                                                    textsize: 16.0,
+                                                    color: Colors.white
+                                                        .withOpacity(0.4),
+                                                    fontWeight: FontWeight.w700,
+                                                    letterSpacing: 1.75,
+                                                  ),
+                                                  SizedBox(
+                                                    height: size.height * 0.04,
+                                                  )
+                                                ],
+                                              )
                                           ],
                                         ),
                                       ),
@@ -648,7 +434,7 @@ class _HomePageState extends State<HomePage> {
                                   index: 4,
                                   child: Column(
                                     children: [
-                                      MainTiitle(
+                                      MainTitle(
                                         number: "0.5",
                                         text: "Blog",
                                       ),
@@ -664,8 +450,7 @@ class _HomePageState extends State<HomePage> {
                                         child: Column(
                                           children: [
                                             CustomText(
-                                              text:
-                                                  "I have a blog where I write about interesting tech related things\nYou can find it on https://one-to-tan@blogspot.com\nor click the links below",
+                                              text: Strings.blogDescription,
                                               textsize: 16.0,
                                               color:
                                                   Colors.white.withOpacity(0.4),
@@ -701,56 +486,17 @@ class _HomePageState extends State<HomePage> {
                                                                 FontWeight.w700,
                                                             letterSpacing: 1.75,
                                                           ),
-
                                                           onTap: () =>
-                                                              method.launchURL(
+                                                              Method.launchURL(
                                                                   blogList[
                                                                           index]
                                                                       .url)),
                                                       // SizedBox(height:20),
                                                       // Image.network("https://lh3.googleusercontent.com/-AwkRDDgxgRQ/YNdjCcF0nyI/AAAAAAAAb3M/Ac7SmJR3mJ07tYTtGhYuFiwHc7PEJknKgCNcBGAsYHQ/w945-h600-p-k-no-nu/image.png"),
-                                                      SizedBox(height:40),
+                                                      SizedBox(height: 40),
                                                     ],
                                                   ));
                                                 })
-                                            // Row(
-                                            //   mainAxisAlignment:
-                                            //       MainAxisAlignment.spaceAround,
-                                            //   children: [
-                                            //     CustomText(
-                                            //       text: "Payment Getway",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "Chat App",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "Spotify Clone",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "TODO App",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //   ],
-                                            // ),
                                           ],
                                         ),
                                       ),
@@ -763,9 +509,9 @@ class _HomePageState extends State<HomePage> {
                                   index: 5,
                                   child: Column(
                                     children: [
-                                      MainTiitle(
-                                        number: "0.5",
-                                        text: "Fun",
+                                      MainTitle(
+                                        number: "0.6",
+                                        text: "Co-curriculars",
                                       ),
 
                                       SizedBox(
@@ -778,56 +524,22 @@ class _HomePageState extends State<HomePage> {
                                         width: size.width - 100,
                                         child: Column(
                                           children: [
-                                            CustomText(
-                                              text:
-                                                  "I play Tennis and Ultimate Frisbee :)",
-                                              textsize: 16.0,
-                                              color:
-                                                  Colors.white.withOpacity(0.4),
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 1.75,
-                                            ),
-                                            SizedBox(
-                                              height: size.height * 0.04,
-                                            ),
-                                            // Row(
-                                            //   mainAxisAlignment:
-                                            //       MainAxisAlignment.spaceAround,
-                                            //   children: [
-                                            //     CustomText(
-                                            //       text: "Payment Getway",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "Chat App",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "Spotify Clone",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //     CustomText(
-                                            //       text: "TODO App",
-                                            //       textsize: 16.0,
-                                            //       color: Colors.white
-                                            //           .withOpacity(0.4),
-                                            //       fontWeight: FontWeight.w700,
-                                            //       letterSpacing: 1.75,
-                                            //     ),
-                                            //   ],
-                                            // ),
+                                            for (var coCurricular
+                                                in Lists.coCurriculars)
+                                              Container(
+                                                  child: Column(children: [
+                                                CustomText(
+                                                  text: coCurricular,
+                                                  textsize: 16.0,
+                                                  color: Colors.white
+                                                      .withOpacity(0.4),
+                                                  fontWeight: FontWeight.w700,
+                                                  letterSpacing: 1.75,
+                                                ),
+                                                SizedBox(
+                                                  height: size.height * 0.04,
+                                                )
+                                              ]))
                                           ],
                                         ),
                                       ),
@@ -847,15 +559,6 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          CustomText(
-                                            text: "0.5 What's Next?",
-                                            textsize: 16.0,
-                                            color: Color(0xff41FBDA),
-                                            letterSpacing: 3.0,
-                                          ),
-                                          SizedBox(
-                                            height: 16.0,
-                                          ),
                                           CustomText(
                                             text: "Get In Touch",
                                             textsize: 42.0,
@@ -885,7 +588,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              method.launchEmail();
+                                              Method.launchEmail();
                                             },
                                             child: Card(
                                               elevation: 4.0,
@@ -933,14 +636,26 @@ class _HomePageState extends State<HomePage> {
                                       width: MediaQuery.of(context).size.width -
                                           100,
                                       //color: Colors.white,
-                                      child: Text(
-                                        "End",
-                                        style: TextStyle(
-                                          color: Colors.white.withOpacity(0.4),
-                                          letterSpacing: 1.75,
-                                          fontSize: 14.0,
+                                      child: Column(children: [
+                                        Text(
+                                          "End",
+                                          style: TextStyle(
+                                            color:
+                                                Colors.white.withOpacity(0.4),
+                                            letterSpacing: 1.75,
+                                            fontSize: 14.0,
+                                          ),
                                         ),
-                                      ),
+                                        SizedBox(height: 15),
+                                        Text(
+                                            "Original Design by Brittany Chiang (https://brittanychiang.com/)",
+                                            style: TextStyle(
+                                              color:
+                                                  Colors.white.withOpacity(0.4),
+                                              letterSpacing: 1.75,
+                                              fontSize: 14.0,
+                                            )),
+                                      ]),
                                     ),
                                   ],
                                 ),
@@ -961,7 +676,7 @@ class _HomePageState extends State<HomePage> {
                         RotatedBox(
                           quarterTurns: 45,
                           child: Text(
-                            "tanya.prasad@gmail.com",
+                            Strings.emailId,
                             style: TextStyle(
                               color: Colors.grey.withOpacity(0.6),
                               letterSpacing: 3.0,
