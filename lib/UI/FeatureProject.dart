@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:Tanya/Widget/CustomText.dart';
+import 'package:mySite/Widget/CustomText.dart';
 
 class FeatureProject extends StatelessWidget {
   final String imagePath;
   final String projectTitle;
   final String projectDesc;
-  final String tech1;
-  final String tech2;
-  final String tech3;
-  final Function ontab;
+  List<String> techStack;
+  final Function ontap;
 
   FeatureProject(
       {this.imagePath,
-      this.ontab,
+      this.ontap,
       this.projectDesc,
       this.projectTitle,
-      this.tech1,
-      this.tech2,
-      this.tech3});
+      this.techStack});
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +71,7 @@ class FeatureProject extends StatelessWidget {
                   ),
                 ),
 
-                // Project Tiitle
+                // Project Title
                 Positioned(
                   top: 16.0,
                   right: 10.0,
@@ -110,36 +106,27 @@ class FeatureProject extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        CustomText(
-                          text: tech1 == null ? "" : tech1,
-                          textsize: 14,
-                          color: Colors.grey,
-                          letterSpacing: 1.75,
-                        ),
-                        SizedBox(
-                          width: 16.0,
-                        ),
-                        CustomText(
-                          text: tech2 == null ? "" : tech2,
-                          textsize: 14,
-                          color: Colors.grey,
-                          letterSpacing: 1.75,
-                        ),
-                        SizedBox(
-                          width: 16.0,
-                        ),
-                        CustomText(
-                          text: tech3 == null ? "" : tech3,
-                          textsize: 14,
-                          color: Colors.grey,
-                          letterSpacing: 1.75,
-                        ),
+                        for (var string in techStack)
+                          Container(
+                              child: Row(
+                            children: [
+                              CustomText(
+                                text: string,
+                                textsize: 14,
+                                color: Colors.grey,
+                                letterSpacing: 1.75,
+                              ),
+                              SizedBox(
+                                width: 16.0,
+                              ),
+                            ],
+                          ))
                       ],
                     ),
                   ),
                 ),
 
-                // Gitub Link
+                // Github Link
                 Positioned(
                   top: size.height * 0.42,
                   right: 10.0,
@@ -153,7 +140,7 @@ class FeatureProject extends StatelessWidget {
                         IconButton(
                           icon: FaIcon(FontAwesomeIcons.github),
                           color: Colors.white.withOpacity(0.3),
-                          onPressed: ontab,
+                          onPressed: ontap,
                         ),
                       ],
                     ),

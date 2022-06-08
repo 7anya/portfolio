@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:Tanya/Widget/CustomText.dart';
+import 'package:mySite/Widget/CustomText.dart';
+import 'package:mySite/staticData.dart';
 
 class About extends StatelessWidget {
+  final descriptionStyle = TextStyle(
+      fontSize: 17, color: Color(0xff828DAA), letterSpacing: 0.75, height: 1.5);
+
   Widget technology(BuildContext context, String text) {
     return Row(
       children: [
         Icon(
           Icons.skip_next,
           color: Color(0xff64FFDA).withOpacity(0.6),
-          size: 14.0,
+          size: 20.0,
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.01,
         ),
         Text(
           text,
-          style: TextStyle(
-            color: Color(0xff717C99),
-            letterSpacing: 1.75,
-          ),
+          style: descriptionStyle,
         )
       ],
     );
@@ -27,9 +28,10 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Container(
       height: size.height,
-      width:size.width - 100,
+      width: size.width - 100,
       child: Row(
         children: [
           //About me
@@ -58,9 +60,11 @@ class About extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                     SizedBox(
+                      // Space before thin grey line
                       width: size.width * 0.01,
                     ),
                     Container(
+                      // Thin grey line
                       width: size.width / 4,
                       height: 1.10,
                       color: Color(0xff303C55),
@@ -69,72 +73,58 @@ class About extends StatelessWidget {
                 ),
 
                 SizedBox(
-                  height: size.height * 0.07,
+                  height: size.height * 0.05,
                 ),
 
-                //About me desc
-                Wrap(
+                //About me description
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomText(
-                      text:
-                          "Hi I am Tanya, and currently I'm a pre-final year student at BITS Pilani, India studying Computer Science and Physics.\n\n",
-                      textsize: 16.0,
-                      color: Color(0xff828DAA),
-                      letterSpacing: 0.75,
-                    ),
-                    CustomText(
-                      text:
-                          "I like to work in the field  of computer systems; Focussing on Cloud and Distributed Computing\n\n",
-                      textsize: 16.0,
-                      color: Color(0xff828DAA),
-                      letterSpacing: 0.75,
-                    ),
-                    CustomText(
-                      text:
-                          "Here are a few technologies I've been working with recently:\n\n",
-                      textsize: 16.0,
-                      color: Color(0xff828DAA),
-                      // fontWeight: FontWeight.w500,
-                      letterSpacing: 0.75,
-                    ),
+                    Text("Hi! I am " + Strings.firstName,
+                        style: descriptionStyle),
+                    Text(Strings.myLongDescription, style: descriptionStyle),
+                    Text("I am skilled at: \n", style: descriptionStyle),
                   ],
                 ),
 
-                Container(
-                  height: size.height * 0.15,
-                  width: size.width,
-                  child: Wrap(  
-                    children: [
-                      Container(
-                        width: size.width * 0.20,
-                        height: size.height * 0.15,
-                        child: Column(
-                          children: [
-                            technology(context, "Go"),
-                            technology(context, "Flutter"),
-                            technology(context, "Firebase/MongoDB"),
-                            technology(context, "Linux"),
-                            technology(context, "Networks"),
-                          ],
-                        ),
+                // Container(
+                //   height: size.height * 0.15,
+                //   width: size.width,
+                Wrap(
+                  children: [
+                    Container(
+                      width: size.width * 0.20,
+                      height: size.height * 0.15,
+                      child: Column(
+                        children: [
+                          for (var skill in Lists.mySkillsLeft)
+                            Column(children: [
+                              technology(context, skill),
+                              SizedBox(
+                                height: 5,
+                              )
+                            ])
+                        ],
                       ),
-                      Container(
-                        width: size.width * 0.15,
-                        height: size.height * 0.15,
-                        child: Column(
-                          children: [
-                            technology(context, "C/C++, Java."),
-                            technology(context, "Python"),
-                            technology(context, "MYSQL"),
-                            technology(context, "Git - Github"),
-                            technology(context, "Agile"),
-
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                )
+                    ),
+                    Container(
+                      width: size.width * 0.15,
+                      height: size.height * 0.15,
+                      child: Column(
+                        children: [
+                          for (var skill in Lists.mySkillsRight)
+                            Column(children: [
+                              technology(context, skill),
+                              SizedBox(
+                                height: 5,
+                              )
+                            ])
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                // )
               ],
             ),
           ),
@@ -161,76 +151,18 @@ class About extends StatelessWidget {
                       ),
                     ),
                   ),
-                  CustomImageAnimation()
+                  Container(
+                    height: size.height / 2,
+                    width: size.width / 5,
+                    color: Colors.black54,
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image: AssetImage("images/profilePic.jpeg"),
+                    ),
+                  )
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomImageAnimation extends StatefulWidget {
-  CustomImageAnimation({Key key}) : super(key: key);
-
-  @override
-  _CustomImageAnimationState createState() => _CustomImageAnimationState();
-}
-
-class _CustomImageAnimationState extends State<CustomImageAnimation> {
-  Color customImageColor = Color(0xff61F9D5).withOpacity(0.5);
-  // ignore: unused_field
-  int _enterCounter = 0;
-  // ignore: unused_field
-  int _exitCounter = 0;
-  double x = 0.0;
-  double y = 0.0;
-
-  void _incrementEnter(PointerEvent details) {
-    setState(() {
-      _enterCounter++;
-    });
-  }
-
-  void _incrementExit(PointerEvent details) {
-    setState(() {
-      customImageColor = Color(0xff61F9D5).withOpacity(0.5);
-      _exitCounter++;
-    });
-  }
-
-  void _updateLocation(PointerEvent details) {
-    setState(() {
-      customImageColor = Colors.transparent;
-      x = details.position.dx;
-      y = details.position.dy;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return MouseRegion(
-      onEnter: _incrementEnter,
-      onHover: _updateLocation,
-      onExit: _incrementExit,
-      child: Stack(
-        children: [
-          Container(
-            height: size.height / 2,
-            width: size.width / 5,
-            color: Colors.black54,
-            child: Image(
-              fit: BoxFit.cover,
-              image: AssetImage("images/pic1.jpeg"),
-            ),
-          ),
-          Container(
-            height: size.height / 2,
-            width: size.width / 5,
-            color: customImageColor,
           ),
         ],
       ),
